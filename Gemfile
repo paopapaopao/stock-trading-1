@@ -18,6 +18,9 @@ gem 'hamlit-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'capybara', '~> 3.32', '>= 3.32.2'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
 end
 
 group :development do
@@ -37,3 +40,5 @@ group :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
+
+gem 'rails-controller-testing'
