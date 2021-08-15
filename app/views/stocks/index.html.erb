@@ -1,0 +1,45 @@
+<h1>Listing stocks</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th>Price</th>
+      <th>Market cap</th>
+      <th>User id</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <% if stock.user == current_user %>
+      <tr>
+        <td>
+          <%= stock.company_name %>
+        </td>
+        <td>
+          <%= stock.price %>
+        </td>
+        <td>
+          <%= stock.market_cap %>
+        </td>
+        <td>
+          <%= stock.user_id %>
+        </td>
+        <td>
+          <%= link_to "Show", stock %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_stock_path(stock) %>
+        </td>
+        <td>
+          <%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %>
+        </td>
+      </tr>
+      <% else %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br/>
+<%= link_to "New Stock", new_stock_path %>
