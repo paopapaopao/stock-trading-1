@@ -28,6 +28,9 @@ RSpec.describe User, type: :model do
 
       subject.user_type = ''
       expect(subject).to_not be_valid
+
+      subject.user_type = ' '
+      expect(subject).to_not be_valid
     end
   end
 
@@ -37,6 +40,9 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
 
       subject.email = ''
+      expect(subject).to_not be_valid
+
+      subject.email = ' '
       expect(subject).to_not be_valid
 
       existing_user
@@ -50,6 +56,9 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
 
       subject.password = ''
+      expect(subject).to_not be_valid
+
+      subject.password = ' '
       expect(subject).to_not be_valid
 
       subject.password = 'a' * 7
@@ -67,6 +76,9 @@ RSpec.describe User, type: :model do
 
       subject.first_name = ''
       expect(subject).to_not be_valid
+
+      subject.first_name = ' '
+      expect(subject).to_not be_valid
     end
   end
 
@@ -76,6 +88,9 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
 
       subject.last_name = ''
+      expect(subject).to_not be_valid
+
+      subject.last_name = ' '
       expect(subject).to_not be_valid
     end
   end
