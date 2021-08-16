@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Show All Users', type: :system do
-  before(:all) { driven_by :rack_test }
+  before(:each) { driven_by :rack_test }
 
   context 'Show all users' do
     it do
