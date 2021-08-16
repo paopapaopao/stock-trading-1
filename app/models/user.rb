@@ -8,5 +8,5 @@ class User < ApplicationRecord
     presence: true, inclusion: { in: %w(buyer broker buyer_and_broker) }
 
   validates :password,
-    presence: true, length: { in: 10..100 }
+    presence: true, length: { in: 8..50 }
 end
