@@ -9,4 +9,10 @@ class User < ApplicationRecord
 
   validates :password,
     presence: true, length: { in: 8..50 }
+
+  validates :first_name,
+    presence: true
+
+  validates :last_name,
+    presence: true
 end
