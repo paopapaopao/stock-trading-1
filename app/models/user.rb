@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   validates :user_type,
     presence: true, inclusion: { in: %w(buyer broker buyer_and_broker) }
+
+  validates :password,
+    presence: true, length: { in: 10..100 }
 end
