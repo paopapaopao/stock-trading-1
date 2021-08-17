@@ -3,4 +3,6 @@ class UserRole < ApplicationRecord
     presence: true
     validates :user_id,
     presence: true
+
+  has_many :roles
 end
