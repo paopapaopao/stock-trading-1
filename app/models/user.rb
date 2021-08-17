@@ -4,14 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :user_type,
-    presence: true, inclusion: { in: %w(buyer broker buyer_and_broker) }
+  # validates :role,
+  #   presence: true, inclusion: { in: %w(buyer broker buyer_and_broker) }
   validates :password,
     presence: true, length: { in: 8..50 }
-  validates :first_name,
-    presence: true
-  validates :last_name,
-    presence: true
+  # validates :first_name,
+  #   presence: true
+  # validates :last_name,
+  #   presence: true
 
   belongs_to :role
   has_many :stocks
