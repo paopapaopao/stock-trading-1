@@ -5,4 +5,5 @@ class UserRole < ApplicationRecord
     presence: true
 
   has_many :roles
+  has_many :users
 end
