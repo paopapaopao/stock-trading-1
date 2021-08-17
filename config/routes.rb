@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :transactions
+  resources :roles
   devise_for :users
   resources :stocks
   root to: "stocks#index"

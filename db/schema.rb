@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2021_08_16_170407) do
     t.integer "market_cap"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_stocks_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "share"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "stock_id"
   end
 
   create_table "transactions", force: :cascade do |t|
