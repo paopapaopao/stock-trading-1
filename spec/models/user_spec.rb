@@ -28,6 +28,9 @@ RSpec.describe User, type: :model do
 
       subject.user_type = ''
       expect(subject).to_not be_valid
+
+      subject.user_type = ' '
+      expect(subject).to_not be_valid
     end
   end
 
@@ -37,6 +40,9 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
 
       subject.email = ''
+      expect(subject).to_not be_valid
+
+      subject.email = ' '
       expect(subject).to_not be_valid
 
       existing_user
@@ -52,10 +58,13 @@ RSpec.describe User, type: :model do
       subject.password = ''
       expect(subject).to_not be_valid
 
-      subject.password = 'a' * 9
+      subject.password = ' '
       expect(subject).to_not be_valid
 
-      subject.password = 'a' * 101
+      subject.password = 'a' * 7
+      expect(subject).to_not be_valid
+
+      subject.password = 'a' * 51
       expect(subject).to_not be_valid
     end
   end
@@ -67,6 +76,9 @@ RSpec.describe User, type: :model do
 
       subject.first_name = ''
       expect(subject).to_not be_valid
+
+      subject.first_name = ' '
+      expect(subject).to_not be_valid
     end
   end
 
@@ -77,6 +89,9 @@ RSpec.describe User, type: :model do
 
       subject.last_name = ''
       expect(subject).to_not be_valid
+
+      subject.last_name = ' '
+      expect(subject).to_not be_valid
     end
   end
 
@@ -85,8 +100,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'Associations' do
-    it { expect(User.reflect_on_association(:transactions).macro).to eq :has_many }
+    it { expect(described_class.reflect_on_association(:transactions).macro).to eq :has_many }
 
-    it { expect(User.reflect_on_association(:stocks).macro).to eq :has_many }
+    it { expect(described_class.reflect_on_association(:stocks).macro).to eq :has_many }
   end
 end
