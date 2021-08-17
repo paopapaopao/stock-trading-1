@@ -60,7 +60,7 @@ class StocksController < ApplicationController
 
   def correct_user
     @stock = current_user.stocks.find_by(id: params[:id])
-    redirect_to stocks_path, notice: "Not Authorized to Edit Friend" if @friend.nil?
+    redirect_to stocks_path, notice: "404 Not found" if @stock.nil?
   end
 
   private
