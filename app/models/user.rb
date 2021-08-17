@@ -14,6 +14,6 @@ class User < ApplicationRecord
   #   presence: true
 
   belongs_to :role
-  has_many :stocks
   has_many :transactions
+  has_many :stocks
 end
