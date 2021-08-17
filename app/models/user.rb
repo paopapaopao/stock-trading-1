@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :last_name,
     presence: true
 
-  belongs_to :user_role
+  belongs_to :role
   has_many :stocks
   has_many :transactions
 end
