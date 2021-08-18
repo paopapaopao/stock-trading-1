@@ -12,34 +12,63 @@
   </thead>
   <tbody>
     <% @stocks.each do |stock| %>
-      <% if current_user.role_id == 1 || stock.user == current_user %>
-      <tr>
-        <td>
-          <%= stock.company_name %>
-        </td>
-        <td>
-          <%= stock.price %>
-        </td>
-        <td>
-          <%= stock.market_cap %>
-        </td>
-        <td>
-          <%= stock.user_id %>
-        </td>
-        <td>
-          <%= link_to "Show", stock %>
-        </td>
+      <% if current_user.isadmin == true %>
+        <tr>
+          <td>
+            <%= stock.company_name %>
+          </td>
+          <td>
+            <%= stock.price %>
+          </td>
+          <td>
+            <%= stock.market_cap %>
+          </td>
+          <td>
+            <%= stock.user_id %>
+          </td>
+          <td>
+            <%= link_to "Show", stock %>
+          </td>
+            <td>
+              <%= link_to "Edit", edit_stock_path(stock) %>
+            </td>
+            <td>
+              <%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %>
+            </td>
+        </tr>
+        
+        <% elsif current_user.role.name == "buyer" || stock.user == current_user %>
+        <tr>
+          <td>
+            <%= stock.company_name %>
+          </td>
+          <td>
+            <%= stock.price %>
+          </td>
+          <td>
+            <%= stock.market_cap %>
+          </td>
+          <td>
+            <%= stock.user_id %>
+          </td>
+          <td>
+            <%= link_to "Show", stock %>
+          </td>
 
-        <% if stock.user == current_user %>
-          <td>
-            <%= link_to "Edit", edit_stock_path(stock) %>
-          </td>
-          <td>
-            <%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %>
-          </td>
-        <% end %>
-      </tr>
+          <% if stock.user == current_user %>
+            <td>
+              <%= link_to "Edit", edit_stock_path(stock) %>
+            </td>
+            <td>
+              <%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %>
+            </td>
+          <% end %>
+        </tr>
+        <% else %>
       <% end %>
+
+
+
     <% end %>
   </tbody>
 </table>
