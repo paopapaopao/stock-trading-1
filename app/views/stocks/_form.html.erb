@@ -13,22 +13,28 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :company_name %>
-    <%= f.text_field :company_name %>
-  </div>
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :market_cap %>
-    <%= f.number_field :market_cap %>
-  </div>
-  <div class="field">
-    <%= f.number_field :user_id, id: :stock_user_id, value: current_user.id, type: :hidden %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save" %>
-  </div>
+  <div class="form-group">
+    <br>
+    <div class="field">
+      <%= f.label :company_name %>
+      <%= f.text_field :company_name, class: "form-control w-25" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :price %>
+      <%= f.number_field :price, class: "form-control w-25" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :market_cap %>
+      <%= f.number_field :market_cap, class: "form-control w-25" %>
+    </div>
+    <div class="field">
+      <%= f.number_field :user_id, id: :stock_user_id, value: current_user.id, type: :hidden %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit "Submit", class: "btn btn-warning text-dark" %>
+    </div>
+  </form>
 <% end %>

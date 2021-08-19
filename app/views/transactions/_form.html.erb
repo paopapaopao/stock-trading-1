@@ -1,0 +1,24 @@
+<%= form_with(model: [@stock, transaction], local: true) do |f| %>
+
+  <div class="field">
+    <%= f.label :share %>
+    <%= f.number_field :share, class: "form-control" %>
+  </div>
+  <br>
+  <div class="field">
+    Price: <%= f.label @stock.price %>
+  </div>
+  <%= f.hidden_field :price, value: @stock.price %>
+  <br>
+  <div class="field">
+    <%= f.label :value %>
+    <%= f.number_field :value, :disabled => false, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :stock_id, value: :stock_id %>
+  <br>
+  <div class="actions">
+    <%= f.submit "Buy", class: "btn btn-warning text-dark" %>
+  </div>
+<% end %>
