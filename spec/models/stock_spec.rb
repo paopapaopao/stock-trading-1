@@ -66,5 +66,7 @@ RSpec.describe Stock, type: :model do
 
   context 'Associations' do
     it { expect(described_class.reflect_on_association(:user).macro).to eq :belongs_to }
+
+    it { expect(described_class.reflect_on_association(:transactions).macro).to eq :has_many }
   end
 end

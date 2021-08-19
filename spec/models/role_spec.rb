@@ -20,7 +20,7 @@ RSpec.describe Role, type: :model do
     it { expect(subject).to be_valid }
   end
 
-  context "Associations" do
-    it { expect(described_class.reflect_on_association(:user_role).macro).to eq :belongs_to }
+  context 'Associations' do
+    it { expect(described_class.reflect_on_association(:user).macro).to eq :belongs_to }
   end
 end

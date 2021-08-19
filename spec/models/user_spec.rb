@@ -100,6 +100,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'Associations' do
+    it { expect(described_class.reflect_on_association(:role).macro).to eq :belongs_to }
+
     it { expect(described_class.reflect_on_association(:transactions).macro).to eq :has_many }
 
     it { expect(described_class.reflect_on_association(:stocks).macro).to eq :has_many }
