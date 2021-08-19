@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  before_action :check_isadmin?, only: %i[ index new create show edit update destroy ]
   before_action :set_role, only: %i[ show edit update destroy ]
 
   # GET /roles or /roles.json
@@ -56,14 +57,21 @@ class RolesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_role
-      @role = Role.find(params[:id])
+  def check_isadmin?
+    if current_user.isadmin != true
+      redirect_to root_path, notice: "404 Not found"
     end
+  end
 
-    # Only allow a list of trusted parameters through.
-    def role_params
-      params.require(:role).permit(:name)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_role
+    @role = Role.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def role_params
+    params.require(:role).permit(:name, :user_id)
+  end
 end

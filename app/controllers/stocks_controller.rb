@@ -1,6 +1,8 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :check_isBuyer?, only: %i[ new create ]
+
   # GET /stocks or /stocks.json
   def index
     @stocks = Stock.all
@@ -60,7 +62,14 @@ class StocksController < ApplicationController
 
   def correct_user
     @stock = current_user.stocks.find_by(id: params[:id])
-    redirect_to stocks_path, notice: "Not Authorized to Edit Friend" if @friend.nil?
+    redirect_to stocks_path, notice: "404 Not found" if @stock.nil?
+  end
+
+  def check_isBuyer?
+    if current_user.isadmin == true || current_user.role.name == "broker"
+    else
+      redirect_to root_path, notice: "404 Not found"
+    end
   end
 
   private

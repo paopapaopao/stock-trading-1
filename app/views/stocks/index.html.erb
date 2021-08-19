@@ -1,42 +1,62 @@
 <h1>Listing stocks</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Company name</th>
-      <th>Price</th>
-      <th>Market cap</th>
-      <th>User id</th>
-      <th>Role</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stocks.each do |stock| %>
+<table class="table table-bordered table-dark table-hover">
+   <thead>
       <tr>
-        <td>
-          <%= stock.company_name %>
-        </td>
-        <td>
-          <%= stock.price %>
-        </td>
-        <td>
-          <%= stock.market_cap %>
-        </td>
-        <td>
-          <%= stock.user_id %>
-        </td>
-        <td>
-          <%= link_to "Show", stock %>
-        </td>
-        <td>
-          <%= link_to "Edit", edit_stock_path(stock) %>
-        </td>
-        <td>
-          <%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %>
-        </td>
+         <th>Stock Id</th>
+         <th>Company Name</th>
+         <th>Price</th>
+         <th>Market Cap</th>
+         <th>Broker</th>
+         <% if current_user.isadmin == true %>  
+            <th></th>
+            <th></th>
+            <th></th>
+         <% elsif current_user.role.name == "buyer" %>
+           <th></th>
+         <% else %>
+            <th></th>
+            <th></th>
+         <% end %>
+         
       </tr>
-    <% end %>
-  </tbody>
+   </thead>
+   <tbody>
+     <% @stocks.each do |stock| %>
+      <% if current_user.isadmin == true %>
+        <tr>
+          <th scope="row"><%= stock.id %></th>
+          <td><%= stock.company_name %></td>
+          <td><%= stock.price %></td>
+          <td><%= stock.market_cap %></td>
+          <td><%= stock.user.email %></td>
+          <td><%= link_to "Show", stock %></td>
+          <td><%= link_to "Edit", edit_stock_path(stock) %></td>
+          <td><%= link_to "Destroy", stock, :method => :delete, :data => { :confirm => "Are you sure?" } %></td>
+        </tr>
+        <% elsif current_user.role.name == "buyer" || stock.user == current_user %>
+          <tr>
+            <th scope="row"><%= stock.id %></th>
+            <td><%= stock.company_name %></td>
+            <td><%= stock.price %></td>
+            <td><%= stock.market_cap %></td>
+            <td><%= stock.user.email %></td>
+            <td><%= link_to "Show", stock %></td>
+            <% if stock.user == current_user %>
+              <td>
+                <%= link_to "Edit", edit_stock_path(stock) %>
+              </td>
+            <% end %>
+          </tr>
+        <% else %>
+      <% end %>
+      <% end %>
+   </tbody>
 </table>
 <br/>
-<%= link_to "New Stock", new_stock_path %>
+<% if current_user.isadmin == true %>
+  <%= link_to "Add Stock", new_stock_path, class: "btn btn-warning" %>
+<% end %>
+
+<% if current_user.isadmin == false && current_user.role.name == "broker" %> 
+  <%= link_to "Add Stock", new_stock_path, class: "btn btn-warning" %>
+<% end %>

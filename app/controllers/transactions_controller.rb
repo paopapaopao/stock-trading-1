@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  before_action :check_isBuyer?, only: %i[ index new create show edit update destroy ]
+  before_action :set_stock, only: %i[ show edit update destroy ]
   before_action :set_transaction, only: %i[ show edit update destroy ]
 
   # GET /transactions or /transactions.json
@@ -21,17 +23,20 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    # @transaction = Transaction.new(transaction_params)
+    # respond_to do |format|
+    #   if @transaction.save
+    #     format.html { redirect_to @transaction, notice: "Transaction was successfully created." }
+    #     format.json { render :show, status: :created, location: @transaction }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @transaction.errors, status: :unprocessable_entity }
+    #   end
+    # end
 
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: "Transaction was successfully created." }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
+    @stock = Stock.find(params[:stock_id])
+    @transaction = @stock.transactions.create(transaction_params)
+    redirect_to transactions_path()
   end
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
@@ -56,15 +61,28 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def check_isBuyer?
+    if current_user.isadmin == false
+      if current_user.role.name != "buyer"
+        redirect_to root_path, notice: "404 Not found"
+      end
+    else
+    end
+  end
+
   private
+
+  def set_stock
+    @stock = Stock.find(params[:stock_id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = @stock.transactions.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def transaction_params
-    params.require(:transaction).permit(:share, :price, :stock_id)
+    params.require(:transaction).permit(:share, :price, :value, :stock_id, :user_id)
   end
 end

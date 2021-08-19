@@ -13,6 +13,15 @@
   <b>Market cap:</b>
   <%= @stock.market_cap %>
 </p>
-<%= link_to "Edit", edit_stock_path(@stock) %>
-\|
+
+<% if current_user.role == nil %>
+  <h2>Buy stock:</h2>
+  <%= render "transactions/form", transaction: @stock.transactions.build %>
+
+  <% else %>
+    <% if current_user.role.name == "buyer" %>
+       <h2>Buy stock:</h2>
+        <%= render "transactions/form", transaction: @stock.transactions.build %>
+    <% end %>
+<% end %>
 <%= link_to "Back", stocks_path %>

@@ -7,12 +7,18 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><%= link_to "My Transactions", transactions_path, class: "nav-link px-2 text-white" %></li>
-            <li><%= link_to "My Stocks", stocks_path, class: "nav-link px-2 text-white" %></li>
-            <li><%= link_to "Roles", stocks_path, class: "nav-link px-2 text-white" %></li>
-            <li><a href="#" class="nav-link px-2 text-white">Roles</a></li>
+            <li><%= link_to "Stocks", stocks_path, class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Transactions", transactions_path, class: "nav-link px-2 text-white" %></li>
+            <% if user_signed_in? %>
+                <% if current_user.isadmin == true %>
+                    <li><%= link_to "Roles", roles_path, class: "nav-link px-2 text-white" %></li>
+                    <li><%= link_to "Users", users_path, class: "nav-link px-2 text-white" %></li>
+                <% else %>
+                <% end %>
+            <% else %>
+            <% end %>
             </ul>
-
+            
             <div class="text-end">
             <% if user_signed_in? %>
                 <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-light me-2" %>
