@@ -39,6 +39,7 @@ group :test do
   gem "webmock"
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+  gem "webdrivers", "~> 4.0"
 end
 
 gem "rails-controller-testing"

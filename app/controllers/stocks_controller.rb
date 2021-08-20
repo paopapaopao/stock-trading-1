@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :check_isBuyer?, only: %i[ new create ]
+  before_action :check_isAdminBroker?, only: %i[ new create ]
 
   # GET /stocks or /stocks.json
   def index
@@ -65,7 +65,7 @@ class StocksController < ApplicationController
     redirect_to stocks_path, notice: "404 Not found" if @stock.nil?
   end
 
-  def check_isBuyer?
+  def check_isAdminBroker?
     if current_user.isadmin == true || current_user.role.name == "broker"
     else
       redirect_to root_path, notice: "404 Not found"

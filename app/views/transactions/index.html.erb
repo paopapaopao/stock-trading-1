@@ -49,7 +49,7 @@
             <%= link_to "Destroy", [transaction.stock, transaction], :method => :delete, :data => { :confirm => "Are you sure?" } %>
           </td>
         </tr>
-        <% elsif current_user.role.name == "buyer" || transaction.user == current_user %>
+        <% elsif current_user.role.name == "buyer" && transaction.user == current_user %>
           <tr>
             <td>
               <%= transaction.share %>

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Role, type: :model do
-  subject { described_class.new(name: "buyer") }
+  subject { described_class.new(name: "buyer" }
 
   context "When name is not valid" do
     it do
@@ -20,7 +20,7 @@ RSpec.describe Role, type: :model do
     it { expect(subject).to be_valid }
   end
 
-  context 'Associations' do
+  context "Associations" do
     it { expect(described_class.reflect_on_association(:user).macro).to eq :belongs_to }
   end
 end
