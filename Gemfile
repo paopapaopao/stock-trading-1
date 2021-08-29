@@ -43,3 +43,4 @@ end
 
 gem "rails-controller-testing"
 gem 'rails_admin', '~> 2.0'
+gem 'dotenv-rails'
