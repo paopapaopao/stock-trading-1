@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.3"
+ruby "2.7.2"
 
 gem "rails", "~> 6.0.3", ">= 6.0.3.4"
 gem "pg"
@@ -42,3 +42,4 @@ group :test do
 end
 
 gem "rails-controller-testing"
+gem 'rails_admin', '~> 2.0'
